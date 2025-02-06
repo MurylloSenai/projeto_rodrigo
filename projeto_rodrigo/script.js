@@ -8,8 +8,8 @@ function loadUsersToTable() {
 
 
 // Adiciona um evento de "submit" ao formulário  
-const form = document.getElementById("userForm");  
-form.addEventListener("submit", function(event) {  
+const form = document.getElementById("form");  
+form.addEventListener("submit", async()=> {  
     event.preventDefault(); // Impede o comportamento padrão do formulário (recarregar a página)   
     const id = document.getElementById("userId").value;
     const name = document.getElementById("name").value; 
