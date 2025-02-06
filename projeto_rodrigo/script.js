@@ -24,28 +24,6 @@ form.addEventListener("submit", async function(event){
     form.reset(); // Limpa os campos do formulário após a submissão  
 });  
 
-
-
-// Função para criar um novo usuário  
-function createUser(name, email) {  
-    const user = {  
-        id: Date.now(), // Gera um ID único baseado no timestamp atual  
-        name: name, // Define o nome do usuário  
-        email: email // Define o e-mail do usuário  
-    };  
-    // Recupera os usuários armazenados no localStorage  
-    let users = JSON.parse(localStorage.getItem("users")) || []; // Se não houver usuários, retorna um array vazio  
-    users.push(user); // Adiciona o novo usuário 
-    
-    // Atualiza o localStorage com a nova lista de usuários  
-    localStorage.setItem("users", JSON.stringify(users)); 
-    
-    // Adiciona o novo usuário à tabela na interface  
-    addUserToTable(user);  
-}  
-
-
-
 // Função para inserir usuário na tabela: PRONTO
 function addUserToTable(user) {
     let row = document.createElement("tr");
