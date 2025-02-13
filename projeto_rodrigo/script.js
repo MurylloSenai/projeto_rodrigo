@@ -1,6 +1,18 @@
 
 //Função para carregar usuários do localStorage na tabela
+async function loadusers() {
+    const userList = document.getElementById("userlist")
+    userList.innerHTML = "";
 
+    try{
+        let resposta = await fetch("http://localhost:3000/usuario/")
+        let users = await resposta.json();
+        console.log(users)
+        users.array.forEach(user => addUserToTable(user));
+    } catch (error) {
+        console.error("erro ao carregar usuarios", error)
+    }
+}tt
 
 // Adiciona um evento de "submit" ao formulário  
 const form = document.getElementById("form");  
@@ -48,13 +60,13 @@ form.addEventListener("submit", async function(event){
 function addUserToTable(user) {
     let row = document.createElement("tr");
 
-    let celula_nome = document.createElement("td");
+    let celula_nome = document.createElement("th");
     celula_nome.innerText = `${user.name}`;
 
-    let celula_email = document.createElement("td");
+    let celula_email = document.createElement("th");
     celula_email.innerText = `${user.email}`;
 
-    let celula_botoes = document.createElement("td");
+    let celula_botoes = document.createElement("th");
 
     let botao_editar = document.createElement("button");
     botao_editar.innerText = "Editar";
@@ -71,13 +83,11 @@ function addUserToTable(user) {
     userList.appendChild(row);
 }
 
-
-
 //funcao excluir usuario: 
 document.querySelector("button")
 .addEventListener("click",()=>{
     fetch(`http://localhost:3000/usuario/email/${id_usuario}`,{
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
             'Content-Type' : 'application/json'
         },
