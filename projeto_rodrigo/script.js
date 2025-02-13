@@ -14,6 +14,7 @@ async function loadusers() {
     }
 }
 
+
 // Adiciona um evento de "submit" ao formulário  
 const form = document.getElementById("form");  
 form.addEventListener("submit", async function(event){
@@ -88,6 +89,7 @@ function addUserToTable(user) {
     userList.appendChild(row);
 }
 
+
 //funcao excluir usuario: 
 document.querySelector("button")
 .addEventListener("click",()=>{
@@ -95,18 +97,14 @@ document.querySelector("button")
         method: 'DELETE',
         headers: {
             'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify({
-            "usuario" : document.querySelector("#usuario").value,
-            "email" : document.querySelector("#email").value
-           
-        })
+        }
     }).then((resposta)=>{
         if(resposta.status != 200){
             console.log(resposta.json())
         }
     })
 })
+
 
 // Função para editar
 document.querySelector("button")
