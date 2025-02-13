@@ -12,7 +12,7 @@ async function loadusers() {
     } catch (error) {
         console.error("erro ao carregar usuarios", error)
     }
-}tt
+}
 
 // Adiciona um evento de "submit" ao formulário  
 const form = document.getElementById("form");  
@@ -31,13 +31,19 @@ form.addEventListener("submit", async function(event){
         createUser(name, email); // Se não houver ID, cria um novo usuário 
     }  
 
+    form.reset(); // Limpa os campos do formulário após a submissão  
+});  
+
+
+async function createUser(name, email) {
+
     try {
         const response = await fetch("http://localhost:3000/usuario/email", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ nome, email,}),
+            body: JSON.stringify({ name, email,}),
         });
 
         if (response.ok) {
@@ -51,9 +57,8 @@ form.addEventListener("submit", async function(event){
         console.error("Erro ao fazer cadastro:", error);
         alert("Erro ao tentar cadastrar. Tente novamente mais tarde.", "danger");
     }
-    form.reset(); // Limpa os campos do formulário após a submissão  
-});  
-
+    
+}
 
 
 // Função para inserir usuário na tabela: PRONTO
